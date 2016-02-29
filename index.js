@@ -34,6 +34,7 @@ module.exports = function(configs) {
     this.prerender = function(_request, _response, _next) {
         // removing any trailing slashes in order to homogenize the cached pages
         var path = _request.path.charAt(_request.path.length - 1) == "/" ? _request.path.slice(0, _request.path.length - 1) : _request.path;
+        path = path != "" ? path : "/";
         // replace remaining dashes with underscores
         var _fname = path.replace(/[\/]/g, "_") + ".html";
 
