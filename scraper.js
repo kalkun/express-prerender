@@ -19,7 +19,7 @@ if (args.length === 3) {
     phantom.exit(4000);
 }
 
-page.clearMemoryCache();
+// page.clearMemoryCache();
 
 page.open(host + path, function() {
     if (statusCode < 300 && statusCode >= 200) {
