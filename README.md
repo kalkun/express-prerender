@@ -20,7 +20,8 @@ In your express application above other routes, just require the plugin with you
 var prerender = require("express-prerender")({
     cache_path      : path/where/cached/files/are/saved,
     dist_folder     : website/distribution/folder, 
-    protocol        : "http" | "https"
+    protocol        : "http" | "https",
+    verbose         : bool
 });
 app.use(prerender.prerender);
 ```
@@ -32,6 +33,8 @@ to know when a cached page is no longer valid. This way when the website folder 
 be recached on next crawler hit.
 
 `protocol` can either be "http" or "https" by default protocol is set to "https".
+
+`verbose` is either true or false, by default it's set to false.
 
 
 **What it does**
