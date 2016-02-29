@@ -29,8 +29,14 @@ var fs = require('fs'),
 module.exports = function(configs) {
     this.cache_path = configs.cache_path;
     this.dist_folder = configs.dist_folder;
-
-
+    this.protocol = configs.protocol;
+    if (!this.cache_path ||
+        !this.dist_folder) {
+        throw new Error("express-prerender needs cache_path and dist_folder to be set");
+    }
+    if (!this.protocol) {
+        this.protocol = "https";
+    }
     this.prerender = function(_request, _response, _next) {
         // removing any trailing slashes in order to homogenize the cached pages
         var path = _request.path.charAt(_request.path.length - 1) == "/" ? _request.path.slice(0, _request.path.length - 1) : _request.path;
@@ -67,7 +73,7 @@ module.exports = function(configs) {
         var getPage = function() {
             var _this = this;
             var spawn = require("child_process").spawn;
-            phantom = spawn("phantomjs", ["--ignore-ssl-errors=true", __dirname + "/scraper.js", path, cache_path]);
+            phantom = spawn("phantomjs", ["--ignore-ssl-errors=true", __dirname + "/scraper.js", path, cache_path, protocol]);
             phantom.stdout.on("data", function(data) {
                 console.log("Output from PhantomJS:\n");
                 console.log(decoder.write(data));

@@ -12,5 +12,8 @@
     "frameworks"
   ],
   "author": "Jesper Henrichsen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express-useragent": "^0.2.4"
+  }
 }
