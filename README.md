@@ -2,8 +2,9 @@
 A package for prerendering pages for crawlers. This is useful when meta tags are dependent on a JavaScript framework to be loaded first 
 e.g. Ember.
 
-**PhantomJS**
-This requires that PhantomJS is installed on the system. 
+**PhantomJS dependant**
+
+express-prerender requires PhantomJS to be installed on the system. 
 
 
 **Install**
