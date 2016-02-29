@@ -1,9 +1,9 @@
 {
   "name": "express-prerender",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A prerender middleware for express. This middleware serves cached prerendered pages for crawlers or if no cached page exists for a requested page it will cache a page using PhantomJS and respond with that newly cached page. This way the express-prerender doesn't need to know about the websites valid paths and it also handles dynamic pages very nicely. ",
   "main": "index.js",
-    "keywords": [
+  "keywords": [
     "express",
     "middleware",
     "prerender",
