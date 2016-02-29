@@ -10,7 +10,7 @@ express-prerender requires PhantomJS to be installed on the system.
 **Install**
 
 ```
-    npm install express-prerender
+npm install express-prerender
 ```
 
 **Usage**
