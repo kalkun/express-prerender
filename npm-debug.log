@@ -1,0 +1,98 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/home/jesper/bin/npm', 'publish' ]
+2 info using npm@3.7.5
+3 info using node@v5.7.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/home/jesper/dev/express-prerender',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /home/jesper/.npm/express-prerender/1.0.2/package.tgz not in flight; packing
+9 verbose correctMkdir /home/jesper/.npm correctMkdir not in flight; initializing
+10 info lifecycle express-prerender@1.0.2~prepublish: express-prerender@1.0.2
+11 silly lifecycle express-prerender@1.0.2~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/home/jesper/.npm/express-prerender/1.0.2/package.tgz',
+12 verbose tar pack   '/home/jesper/dev/express-prerender' ]
+13 verbose tarball /home/jesper/.npm/express-prerender/1.0.2/package.tgz
+14 verbose folder /home/jesper/dev/express-prerender
+15 verbose addLocalTarball adding from inside cache /home/jesper/.npm/express-prerender/1.0.2/package.tgz
+16 verbose correctMkdir /home/jesper/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd express-prerender@1.0.2
+18 verbose afterAdd /home/jesper/.npm/express-prerender/1.0.2/package/package.json not in flight; writing
+19 verbose correctMkdir /home/jesper/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /home/jesper/.npm/express-prerender/1.0.2/package/package.json written
+21 silly publish { name: 'express-prerender',
+21 silly publish   version: '1.0.2',
+21 silly publish   description: 'A prerender middleware for express. This middleware serves cached prerendered pages for crawlers or if no cached page exists for a requested page it will cache a page using PhantomJS and respond with that newly cached page. This way the express-prerender doesn\'t need to know about the websites valid paths and it also handles dynamic pages very nicely. ',
+21 silly publish   main: 'index.js',
+21 silly publish   keywords:
+21 silly publish    [ 'express',
+21 silly publish      'middleware',
+21 silly publish      'prerender',
+21 silly publish      'javascript',
+21 silly publish      'frontend',
+21 silly publish      'frameworks' ],
+21 silly publish   author: { name: 'Jesper Henrichsen' },
+21 silly publish   license: 'ISC',
+21 silly publish   readme: '##express-prerender\nA package for prerendering pages for crawlers. This is useful when meta tags are dependent on a JavaScript framework to be loaded first \ne.g. Ember.\n\n**Install**\n\n```\n    npm install express-prerender\n```\n\n**Usage**\n\nIn your express application just require the plugin with your configuration like such:\n```\nvar prerender = require("express-prerender")({\n    cache_path      : path/where/cached/files/are/saved,\n    dist_folder     : website/distribution/folder\n});\napp.use(prerender.prerender);\n```\n\nBoth `cache_path` and `dist_folder` are relative to the file where express-prerender is required or absolute.\n\nThe reason to give the path of the distribution folder in `dist_folder` is for the express-prerender\nto know when a cached page is no longer valid. This way when the website folder is modified the pages will\nbe recached on next crawler hit.',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: '1e99b1d6789a677a5d151071ac66855e6ce543a3',
+21 silly publish   _id: 'express-prerender@1.0.2',
+21 silly publish   scripts: {},
+21 silly publish   _shasum: '2fbc0af3a76456ca51af21e0aeaac283c0d4bd44',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name express-prerender
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry uri https://registry.npmjs.org/express-prerender
+27 verbose publish registryBase https://registry.npmjs.org/
+28 silly publish uploading /home/jesper/.npm/express-prerender/1.0.2/package.tgz
+29 verbose request uri https://registry.npmjs.org/express-prerender
+30 verbose request sending authorization for write operation
+31 info attempt registry request try #1 at 4:18:34 PM
+32 verbose request using bearer token for auth
+33 verbose request id 93757451c25568d6
+34 http request PUT https://registry.npmjs.org/express-prerender
+35 http 403 https://registry.npmjs.org/express-prerender
+36 verbose headers { 'content-type': 'application/json',
+36 verbose headers   'cache-control': 'max-age=300',
+36 verbose headers   'content-length': '95',
+36 verbose headers   'accept-ranges': 'bytes',
+36 verbose headers   date: 'Mon, 29 Feb 2016 15:18:36 GMT',
+36 verbose headers   via: '1.1 varnish',
+36 verbose headers   connection: 'keep-alive',
+36 verbose headers   'x-served-by': 'cache-fra1247-FRA',
+36 verbose headers   'x-cache': 'MISS',
+36 verbose headers   'x-cache-hits': '0',
+36 verbose headers   'x-timer': 'S1456759115.134128,VS0,VE1011' }
+37 verbose request invalidating /home/jesper/.npm/registry.npmjs.org/express-prerender on PUT
+38 error publish Failed PUT 403
+39 verbose stack Error: "You cannot publish over the previously published version 1.0.2." : express-prerender
+39 verbose stack     at makeError (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+39 verbose stack     at CachingRegistryClient.<anonymous> (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+39 verbose stack     at Request._callback (/usr/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+39 verbose stack     at Request.self.callback (/usr/lib/node_modules/npm/node_modules/request/request.js:199:22)
+39 verbose stack     at emitTwo (events.js:100:13)
+39 verbose stack     at Request.emit (events.js:185:7)
+39 verbose stack     at Request.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+39 verbose stack     at emitOne (events.js:95:20)
+39 verbose stack     at Request.emit (events.js:182:7)
+39 verbose stack     at IncomingMessage.<anonymous> (/usr/lib/node_modules/npm/node_modules/request/request.js:963:12)
+40 verbose statusCode 403
+41 verbose pkgid express-prerender
+42 verbose cwd /home/jesper/dev/express-prerender
+43 error Linux 3.13.0-79-generic
+44 error argv "/usr/bin/nodejs" "/home/jesper/bin/npm" "publish"
+45 error node v5.7.0
+46 error npm  v3.7.5
+47 error code E403
+48 error "You cannot publish over the previously published version 1.0.2." : express-prerender
+49 error If you need help, you may report this error at:
+49 error     <https://github.com/npm/npm/issues>
+50 verbose exit [ 1, true ]
