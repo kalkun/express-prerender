@@ -36,7 +36,7 @@ be recached on next crawler hit.
 
 **What it does**
 
-*express-prerender* will filter any requests with express-useragent where the user-agent corresponds to a robot. 
+*express-prerender* will filter any requests with *express-useragent* where the user-agent corresponds to a robot. 
 If the user-agent is not one, then next() is called to continue your express app as normal. Otherwise *express-prerender* 
 will attempt to read a cached file of the requested page. 
 
