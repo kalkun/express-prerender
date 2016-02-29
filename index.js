@@ -108,6 +108,7 @@ module.exports  = function(configs) {
     dist_folder = configs.dist_folder; 
     
     var prerender = _prerender;
+    return this;
 }
 
 
