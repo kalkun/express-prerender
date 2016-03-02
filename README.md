@@ -1,6 +1,8 @@
 ##express-prerender
 A package for prerendering pages for crawlers. This is useful when meta tags are dependent on a JavaScript framework to be loaded first 
-e.g. Ember.
+e.g. Ember. The middleware will serve a cached page for any requests by crawlers to a page or cache the page if no valid cache exists. 
+This way the middleware handles dynamic pages very well since it does not need to know of any paths on the website before hand. Providing 
+a path to the website folder enables the middleware to determine wether a cached page is still valid or not. 
 
 **PhantomJS dependant**
 
@@ -48,3 +50,16 @@ to render the requested path on localhost and then that is served to the crawler
 
 The `dist_folder` is looked at to determine wether the last modified time was before or after the last modified time of a cached page. 
 This is in order to determine wether a cached page is still valid, if not the page will be recached.  
+
+
+**Test**
+
+You can test the middleware with curl. Issuing a normal request to your website should reveal what you would normally see:
+```
+curl yoursite
+```
+
+To check that robots are served with a prerendered version, then you can set the useragent to 'twitterbot' for instance:
+```
+curl yoursite -A twitterbot
+```
