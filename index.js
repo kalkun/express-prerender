@@ -30,11 +30,16 @@ module.exports          = function(configs) {
     this.cache_path     = configs.cache_path;
     this.dist_folder    = configs.dist_folder;
     this.protocol       = configs.protocol || "https";
+    this.ignore         = configs.ignore
     this.verbose        = configs.verbose || false;
 
     if (!this.cache_path ||
         !this.dist_folder) {
         throw new Error("express-prerender needs cache_path and dist_folder to be set");
+    }
+
+    if( Object.prototype.toString.call( this.ignore ) != '[object Array]' ) {
+        throw new Error("Ignore patterns must be a list");
     }
 
     this.prerender      = function(_request, _response, _next) {
@@ -48,6 +53,17 @@ module.exports          = function(configs) {
             if (this.verbose) {
                 console.log(message);
             }
+        }
+
+        var validPath   = function() {
+            var valid = true;
+            this.ignore.forEach(function(ign) {
+                if (_request.path.indexOf(ign) > -1) {
+                    log("Path will be ignored " +  _request.path);
+                    valid = false;
+                }
+            });
+            return valid;
         }
 
         var getCache    = function() {
@@ -102,12 +118,7 @@ module.exports          = function(configs) {
         };
 
         var readUseragent = function() {
-            if (_request.path.indexOf(".") >= 0 ||
-                _request.path.indexOf("partner_images") >= 0 ||
-                _request.path.indexOf("order_images") >= 0 ||
-                _request.path.indexOf("API") >= 0) {
-                _next();
-            } else {
+            if (validPath()) {
                 var useragent = require("express-useragent"),
                     source = _request.headers['user-agent'],
                     ua = useragent.parse(source);
@@ -116,6 +127,8 @@ module.exports          = function(configs) {
                 } else {
                     _next()
                 }
+            } else {
+                _next();
             }
         }();
     }

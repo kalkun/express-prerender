@@ -22,8 +22,9 @@ In your express application above other routes, just require the plugin with you
 var prerender = require("express-prerender")({
     cache_path      : path/where/cached/files/are/saved,
     dist_folder     : website/distribution/folder, 
+    ignore          : ["list", "of", "strings"],
     protocol        : "http" | "https",
-    verbose         : bool
+    verbose         : bool,
 });
 app.use(prerender.prerender);
 ```
@@ -33,6 +34,10 @@ Both `cache_path` and `dist_folder` are relative to the file where *express-prer
 The reason to give the path of the distribution folder in `dist_folder` is for the *express-prerender*
 to know when a cached page is no longer valid. This way when the website folder is modified the pages will
 be recached on next crawler hit.
+
+`ignore` is a list of strings that, if any path includes any of the strings then the express-prerender will not 
+try to cache the request even though it is requested by a crawler. This is useful for leaving out calls for 
+resources.
 
 `protocol` can either be "http" or "https" by default protocol is set to "https".
 
