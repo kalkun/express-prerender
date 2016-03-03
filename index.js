@@ -30,7 +30,7 @@ module.exports          = function(configs) {
     this.cache_path     = configs.cache_path;
     this.dist_folder    = configs.dist_folder;
     this.protocol       = configs.protocol || "https";
-    this.ignore         = configs.ignore
+    this.ignore         = configs.ignore || [],
     this.verbose        = configs.verbose || false;
 
     if (!this.cache_path ||
