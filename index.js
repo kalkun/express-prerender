@@ -72,7 +72,7 @@ module.exports          = function(configs) {
             try {
                 cache = fs.lstatSync(this.cache_path + _fname);
             } catch (e) {
-                log("Page %s is not cached " + path);
+                log("Page is not cached: " + path);
             }
             if (cache && cache.isFile()) {
                 var cacheAge = cache.mtime.getTime();
