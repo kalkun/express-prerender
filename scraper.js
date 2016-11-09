@@ -1,6 +1,5 @@
 var page = require('webpage').create(),
     fs = require('fs'),
-    host = "://localhost",
     system = require("system"),
     args = system.args;
 
@@ -10,11 +9,13 @@ page.onResourceReceived = function(resource) {
     statusCode = resource.status;
 };
 
-if (args.length === 4) {
+if (args.length === 6) {
     var path = String(args[1]);
     var fname = path.replace(/[\/]/g, "_") + ".html";
     var cache_path = String(args[2]);
     var protocol = String(args[3]);
+    var host = String(args[4]) || "localhost";
+    var port = String(args[5]) || "";
 } else {
     // required param exit with some error: 4000
     phantom.exit(4000);
@@ -22,9 +23,9 @@ if (args.length === 4) {
 
 // page.clearMemoryCache();
 
-page.open(protocol + host + path, function() {
+var url = protocol + "://" + host + (port ? ":" + port : "") + path;
+page.open(url, function() {
     if (statusCode < 300 && statusCode >= 200) {
-        console.log("getting: ", protocol + host + path);
         console.log("saving to: ", cache_path + fname);
         fs.write(cache_path + fname, page.content, 'w');
         phantom.exit(0);
