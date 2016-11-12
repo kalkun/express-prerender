@@ -20,11 +20,13 @@ npm install express-prerender
 In your express application above other routes, just require the plugin with your configuration like such:
 ```
 var prerender = require("express-prerender")({
-    cache_path      : path/where/cached/files/are/saved,
+    cache_path      : path/where/cached/files/are/saved/,
     dist_folder     : website/distribution/folder, 
     ignore          : ["list", "of", "strings"],
     protocol        : "http" | "https",
-    verbose         : bool,
+    host            : hostname,
+    port            : portnumber,
+    verbose         : bool
 });
 app.use(prerender.prerender);
 ```
@@ -37,9 +39,13 @@ be recached on next crawler hit.
 
 `ignore` is a list of strings that, if any path includes any of the strings then the express-prerender will not 
 try to cache the request even though it is requested by a crawler. This is useful for leaving out calls for 
-resources.
+resources. By default de list is set to [].
 
 `protocol` can either be "http" or "https" by default protocol is set to "https".
+
+`host` is the hostname for the request by prerender, by default its set to "localhost".
+
+`port` is a portnumber for the request by prerender, by default is set to none (so default port for protocol)
 
 `verbose` is either true or false, by default it's set to false.
 

@@ -30,12 +30,18 @@ module.exports          = function(configs) {
     this.cache_path     = configs.cache_path;
     this.dist_folder    = configs.dist_folder;
     this.protocol       = configs.protocol || "https";
-    this.ignore         = configs.ignore || [],
+    this.host           = configs.host || "localhost";
+    this.port           = configs.port || "";
+    this.ignore         = configs.ignore || [];
     this.verbose        = configs.verbose || false;
 
     if (!this.cache_path ||
         !this.dist_folder) {
         throw new Error("express-prerender needs cache_path and dist_folder to be set");
+    }
+
+    if (this.cache_path.slice(-1) !== "/") {
+        throw new Error("express-prerender needs last character of cache_path to be '/'");
     }
 
     if( Object.prototype.toString.call( this.ignore ) != '[object Array]' ) {
@@ -53,7 +59,7 @@ module.exports          = function(configs) {
             if (this.verbose) {
                 console.log(message);
             }
-        }
+        };
 
         var validPath   = function() {
             var valid = true;
@@ -64,7 +70,7 @@ module.exports          = function(configs) {
                 }
             });
             return valid;
-        }
+        };
 
         var getCache    = function() {
             var cache = null,
@@ -72,7 +78,7 @@ module.exports          = function(configs) {
             try {
                 cache = fs.lstatSync(this.cache_path + _fname);
             } catch (e) {
-                log("Page %s is not cached " + path);
+                log("Page is not cached: " + path);
             }
             if (cache && cache.isFile()) {
                 var cacheAge = cache.mtime.getTime();
@@ -89,13 +95,13 @@ module.exports          = function(configs) {
             } else {
                 getPage();
             }
-        }
+        };
 
         // scrapes the page from the running page
         var getPage     = function() {
             var _this = this;
             var spawn = require("child_process").spawn;
-            phantom = spawn("phantomjs", ["--ignore-ssl-errors=true", __dirname + "/scraper.js", path, cache_path, protocol]);
+            phantom = spawn("phantomjs", ["--ignore-ssl-errors=true", __dirname + "/scraper.js", path, cache_path, protocol, host, port]);
             phantom.stdout.on("data", function(data) {
                 log("Output from PhantomJS:\n");
                 log(decoder.write(data));
@@ -131,7 +137,7 @@ module.exports          = function(configs) {
                 _next();
             }
         }();
-    }
+    };
 
     return this;
-}
+};
