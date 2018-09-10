@@ -1,4 +1,4 @@
-##express-prerender
+## express-prerender
 A package for prerendering pages for crawlers. This is useful when meta tags are dependent on a JavaScript framework to be loaded first 
 e.g. Ember. The middleware will serve a cached page for any requests by crawlers to a page or cache the page if no valid cache exists. 
 This way the middleware handles dynamic pages very well since it does not need to know of any paths on the website before hand. Providing 
